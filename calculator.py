@@ -1,26 +1,35 @@
-what = input ('что выполнить? (+, -, /, *):')
 
-a = float (input('Введите первое число:'))
-b = float (input('Введите второе число:'))
+def calculator(calc):
+    try:
+        tokens = calc.split()
+        if len(tokens)!= 3:
+            raise ValueError('Неверный формат ввода! Необходимо ввести например: (a + b, a - b, a * b, a / b.)')
 
-if not (1 <= a <= 10) or not (1 <= b <= 10):
-    raise ValueError("Числа должны быть от 1 до 10 включительно.")
+        a, op, b = tokens
+
+        a = int(a)
+        b = int(b)
+        if not (1 <= a <= 10) or not (1 <= b <= 10):
+            raise ValueError('Числа должны быть от 1 до 10 включительно!')
+
+        if op == '+':
+            result = a + b
+        elif op == '-':
+            result = a - b
+        elif op == '/':
+            result = a // b
+        elif op == '*':
+            result = a * b
+        else:
+            raise ValueError('Неподдерживаемая арифметическая операция!')
+
+        return result
+
+    except:
+            print ('Ошибка!')
+            exit()
 
 
-if what == '+':
-    c = a + b
-    print('Результат:' + str (c))
-elif what == '-':
-    c = a - b
-    print('Результат:' + str (c))
-elif what == '/':
-    c = a / b
-    print('Результат:' + str (c))
-elif what == '*':
-    c = a * b
-    print('Результат:' + str (c))
-else:
-    print('Неверное значение')
-
-
-
+calc = input ('Введите выражения из представленного примера: (a + b, a - b, a * b, a / b.)')
+result = calculator(calc)
+print(f"Результат: {result}")
